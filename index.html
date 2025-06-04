@@ -25,14 +25,20 @@
   mindar-image="imageTargetSrc:targets.mind;autoStart:true;filterBeta:0.95;filterMinCF:0.00001"
   vr-mode-ui="enabled:false"
   device-orientation-permission-ui="enabled:true">
+
   <a-assets>
     <img id="tex-czas" src="assets/S1CZAS_X.png">
+    <img id="tex-targ" src="assets/S3TARG.png">        <!-- drugi obrazek -->
   </a-assets>
+
   <a-camera mindar-image-camera look-controls="enabled:false"></a-camera>
+
   <a-entity id="anchor-czas" mindar-image-target="targetIndex:0"></a-entity>
+  <a-entity id="anchor-targ" mindar-image-target="targetIndex:1"></a-entity> <!-- drugi anchor -->
 </a-scene>
 
 <script>
+/* ukryj loader po starcie renderu */
 document.querySelector('a-scene').addEventListener('renderstart',()=>loader.remove());
 
 function makePlane(texSel){
@@ -42,19 +48,26 @@ function makePlane(texSel){
   p.setAttribute('src', texSel);
   p.setAttribute('width', '1');
   p.setAttribute('height', ar.toString());
-  p.setAttribute('position', '0 0.05 0.005'); // przesunięcie w górę
+  p.setAttribute('position', '0 0.05 0.005');  /* przesunięcie w górę */
   p.setAttribute('material','shader:flat;transparent:true');
   return p;
 }
 
-const anchor = document.getElementById('anchor-czas');
-anchor.addEventListener('targetFound', ()=>{
-  anchor.innerHTML = '';
-  anchor.appendChild(makePlane('#tex-czas'));
+/* pierwszy target */
+const anchorCzas = document.getElementById('anchor-czas');
+anchorCzas.addEventListener('targetFound', ()=>{
+  anchorCzas.innerHTML = '';
+  anchorCzas.appendChild(makePlane('#tex-czas'));
 });
-anchor.addEventListener('targetLost', ()=>{
-  anchor.innerHTML = '';
+anchorCzas.addEventListener('targetLost', ()=>{ anchorCzas.innerHTML = ''; });
+
+/* drugi target */
+const anchorTarg = document.getElementById('anchor-targ');
+anchorTarg.addEventListener('targetFound', ()=>{
+  anchorTarg.innerHTML = '';
+  anchorTarg.appendChild(makePlane('#tex-targ'));
 });
+anchorTarg.addEventListener('targetLost', ()=>{ anchorTarg.innerHTML = ''; });
 </script>
 </body>
 </html>
