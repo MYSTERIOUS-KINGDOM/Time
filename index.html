@@ -22,19 +22,19 @@
 
 <a-scene
   embedded
-  mindar-image="imageTargetSrc:targets.mind;autoStart:true;filterBeta:0.95;filterMinCF:0.00001"
+  mindar-image="imageTargetSrc:targets.mind;autoStart:true;filterBeta:0.7;filterMinCF:0.0000001"
   vr-mode-ui="enabled:false"
   device-orientation-permission-ui="enabled:true">
 
   <a-assets>
     <img id="tex-czas" src="assets/S1CZAS_X.png">
-    <img id="tex-targ" src="assets/S3TARG.png">        <!-- drugi obrazek -->
+    <img id="tex-targ" src="assets/S3TARG.png">
   </a-assets>
 
   <a-camera mindar-image-camera look-controls="enabled:false"></a-camera>
 
   <a-entity id="anchor-czas" mindar-image-target="targetIndex:0"></a-entity>
-  <a-entity id="anchor-targ" mindar-image-target="targetIndex:1"></a-entity> <!-- drugi anchor -->
+  <a-entity id="anchor-targ" mindar-image-target="targetIndex:1"></a-entity>
 </a-scene>
 
 <script>
